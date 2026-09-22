@@ -40,6 +40,11 @@ def calculate_distance(word,originalword):
 
 
 def calculate_frequency(word,originalword):
+    # The feminine article must be as frequent as the masculine article ο.
+    # The generated dictionary gave η only 42; the override gives the same
+    # frequency as letter ο.
+    if originalword == 'η':
+        return [originalword,199]
     max_similarity=-1.0
     for key in frec_dict.keys():
         similarity=jellyfish.jaro_winkler_similarity(word,key)
